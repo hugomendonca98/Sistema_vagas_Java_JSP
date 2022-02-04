@@ -4,9 +4,11 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="vagaService.vagas.ConectaDB" %>
+<%@ page import="vagaService.vagas.Vagas"%>
 
 
 <%String id = request.getParameter("id"); %>
+
 <%String sql = "SELECT * FROM vagas WHERE idVaga = ".concat(id); %>
 <%System.out.printf(sql);%>
 <%
@@ -53,7 +55,8 @@ ResultSet rs = st.executeQuery(sql);
 <% while(rs.next())
 	{
 %>
-	<form action="vaga_post.jsp" method="POST">
+	<form action="vaga_put.jsp" method="POST">
+	<input style="display: none" type="text" name="idvaga" value="<%=rs.getString("idvaga")%>">
 	  <div class="mb-3 mt-5">
 	    <label for="InputDescription" class="form-label">Descrição</label>
 	    <input required type="text" name="descricao" value="<%=rs.getString("descricao")%>"  class="form-control" id="InputDescription" aria-describedby="descriptionHelp">
